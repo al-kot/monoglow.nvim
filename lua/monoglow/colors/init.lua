@@ -54,6 +54,8 @@ function M.setup(opts)
   ---@field mode ModeColors Mode colors for statusline/vim indicators
   local colors = palette
 
+  opts.on_colors(colors)
+
   util.bg = colors.bg
   util.fg = colors.fg
 
@@ -196,7 +198,6 @@ function M.setup(opts)
     })
   end
 
-  opts.on_colors(colors)
 
   return colors, opts
 end
