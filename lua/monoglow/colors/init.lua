@@ -105,7 +105,8 @@ function M.setup(opts)
   colors.title = colors.gray6
 
   -- Syntax highlighting
-  colors.syntax = {
+  colors.syntax = colors.syntax or {}
+  colors.syntax = vim.tbl_deep_extend("keep", colors.syntax, {
     boolean = colors.blue2,
     builtin = util.lighten(colors.gray5, 0.87),
     comment = colors.special.comment,
@@ -129,7 +130,7 @@ function M.setup(opts)
     var = colors.gray8,
     var_builtin = util.darken(colors.gray6, 0.90),
     var_member = colors.gray7,
-  }
+  })
 
   -- Filesystem colors (for neo-tree, oil, etc.)
   colors.fs = {
@@ -197,7 +198,6 @@ function M.setup(opts)
       white_bright = "#f0f0f0",
     })
   end
-
 
   return colors, opts
 end
