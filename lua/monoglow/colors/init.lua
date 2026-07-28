@@ -66,12 +66,13 @@ function M.setup(opts)
   colors.is_light = is_light
 
   -- Diff colors (for inline diffs)
-  colors.diff = {
+  colors.diff = colors.diff or {}
+  colors.diff = vim.tbl_deep_extend("keep", colors.diff, {
     add = util.darken(colors.git.add, 0.60),
     delete = util.darken(colors.git.delete, 0.60),
     change = colors.gray6,
     text = colors.gray5,
-  }
+  })
 
   -- UI backgrounds
   colors.black = util.blend_bg(colors.bg, 0.8, is_light and "#ffffff" or "#000000")
@@ -133,21 +134,23 @@ function M.setup(opts)
   })
 
   -- Filesystem colors (for neo-tree, oil, etc.)
-  colors.fs = {
+  colors.fs = colors.fs or {}
+  colors.fs = vim.tbl_deep_extend("keep", colors.fs, {
     dir = colors.gray7,
     file = colors.gray8,
     exec = colors.blue2,
     link = colors.luster,
     binary_data = colors.gray6,
     socket = colors.gray6,
-  }
+  })
 
   -- Completion menu colors
-  colors.cmp = {
+  colors.cmp = colors.cmp or {}
+  colors.cmp = vim.tbl_deep_extend("keep", colors.cmp, {
     kind = colors.gray7,
     snippet = colors.lack,
     deprecated = colors.gray4,
-  }
+  })
 
   -- Diagnostics
   colors.error = colors.light_red
@@ -159,17 +162,19 @@ function M.setup(opts)
 
   -- Mode colors (for statusline/vim mode indicators)
   ---@class ModeColors
-  colors.mode = {
+  colors.mode = colors.mode or {}
+  colors.mode = vim.tbl_deep_extend("keep", colors.mode, {
     normal = { bg = util.darken(colors.bg_statusline, 0.2), fg = colors.gray8 },
     insert = { bg = colors.glow, fg = colors.black },
     visual = { bg = colors.gray9, fg = colors.black },
     replace = { bg = colors.gray9, fg = colors.black }, -- same as visual
     command = { bg = colors.glow, fg = colors.black }, -- same as insert
-  }
+  })
 
   -- Terminal colors (ANSI 16-color palette)
   ---@class TerminalColors
-  colors.terminal = {
+  colors.terminal = colors.terminal or {}
+  colors.terminal = vim.tbl_deep_extend("keep", colors.terminal, {
     black = colors.gray3,
     black_bright = util.lighten(colors.gray3, 0.80),
     red = util.brighten("#fd1b7c", -0.15, 0),
@@ -186,7 +191,7 @@ function M.setup(opts)
     cyan_bright = util.brighten(colors.blue2),
     white = colors.gray10,
     white_bright = colors.white,
-  }
+  })
 
   if is_light then
     colors.terminal = vim.tbl_deep_extend("force", colors.terminal, {
